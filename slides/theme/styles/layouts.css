@@ -1,0 +1,255 @@
+:root {
+  --rte-bg: #1c1a1b;
+  --rte-accent: #4cc3f0;
+  --rte-accent-deep: #0a4a6e;
+  --rte-accent-green: #7ed957;
+  --rte-text: #f2f2f2;
+  --rte-muted: #a9b7bd;
+}
+
+.slidev-layout {
+  height: 100%;
+  color: var(--rte-text);
+  background: var(--rte-bg);
+  padding-bottom: 4.25rem;
+  font-size: 1.85rem;
+  box-sizing: border-box;
+}
+
+.slidev-layout h1 {
+  color: var(--rte-accent);
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1.25;
+  margin: 0 0 1rem 0;
+}
+
+.slidev-layout h2 {
+  color: var(--rte-accent);
+  font-weight: 600;
+  font-size: 1.85rem;
+}
+
+.slidev-layout a {
+  color: var(--rte-accent);
+}
+
+.slidev-layout code {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.slidev-layout strong {
+  color: #ffffff;
+}
+
+.slidev-layout ol {
+  list-style: decimal;
+  padding-left: 1.4em;
+}
+
+.slidev-layout ul {
+  list-style: disc;
+  padding-left: 1.4em;
+}
+
+.slidev-layout li {
+  margin: 0.15em 0;
+}
+
+.slidev-layout li::marker {
+  color: var(--rte-accent);
+  font-weight: 700;
+}
+
+.rte-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.4rem;
+  background: #0e0d0d;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+}
+
+.rte-footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rte-footer-logo-cmuq {
+  display: block;
+  height: 2.1rem;
+  width: auto;
+}
+
+.rte-footer-logo-hbj {
+  display: block;
+  height: 1.5rem;
+  width: auto;
+}
+
+.rte-footer-slide {
+  color: var(--rte-muted);
+  font-size: 0.8rem;
+}
+
+.rte-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+}
+
+.rte-chip {
+  display: inline-block;
+  border: 1px solid var(--rte-accent);
+  color: var(--rte-accent);
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.6em;
+  font-weight: 600;
+}
+
+.rte-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.rte-flow-step {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rte-prompt {
+  position: relative;
+  background: rgba(126, 217, 87, 0.06);
+  border: 1px solid rgba(126, 217, 87, 0.3);
+  border-left: 4px solid var(--rte-accent-green);
+  border-radius: 8px;
+  padding: 1.1rem 1.1rem 0.9rem 1.3rem;
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap;
+}
+
+.rte-prompt::before {
+  content: "PROMPT";
+  position: absolute;
+  top: -0.6rem;
+  left: 1rem;
+  background: var(--rte-bg);
+  padding: 0 0.4rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  color: var(--rte-accent-green);
+  font-weight: 700;
+  font-family: Calibri, "Nunito Sans", sans-serif;
+}
+
+.rte-window {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.rte-window-bar {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.55rem 0.7rem;
+  background: rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rte-window-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+}
+
+.rte-window-dot.red {
+  background: #ff5f57;
+}
+
+.rte-window-dot.yellow {
+  background: #febc2e;
+}
+
+.rte-window-dot.green {
+  background: #28c840;
+}
+
+.rte-window-body {
+  padding: 1rem 1.3rem;
+  font-family: "Courier New", monospace;
+  text-align: left;
+}
+
+.rte-icon {
+  display: block;
+  font-size: 1.7em;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.extended-notes {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--rte-muted);
+  white-space: pre-line;
+}
+
+.extended-notes::before {
+  content: "Notes";
+  display: block;
+  font-weight: 700;
+  color: var(--rte-accent);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+html.extended-notes-mode .slidev-layout {
+  height: auto;
+  min-height: 100%;
+}
+
+html.extended-notes-mode .rte-footer {
+  position: static;
+  margin-top: 1.5rem;
+}
+
+html.extended-notes-mode .slidev-layout.section,
+html.extended-notes-mode .slidev-layout.statement,
+html.extended-notes-mode .slidev-layout.cover {
+  justify-content: flex-start;
+}
+
+html.extended-notes-mode .slidev-layout .fixed,
+html.extended-notes-mode .slidev-layout [style*="position:fixed"],
+html.extended-notes-mode .slidev-layout [style*="position: fixed"] {
+  position: static !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  margin: 1rem auto !important;
+  text-align: center !important;
+}

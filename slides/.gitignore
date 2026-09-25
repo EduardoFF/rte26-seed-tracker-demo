@@ -1,0 +1,9 @@
+# dependencies (regenerate with `npm install`)
+node_modules/
+
+# build/export output
+dist/
+*.pdf
+
+# OS/editor cruft
+.DS_Store
