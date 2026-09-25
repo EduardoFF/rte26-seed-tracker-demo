@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+  index.html: the Seed Tracker page.
+  Layout only. The rules are in inventory.js and the page logic is in app.js.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seed Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🌱 Seed Tracker</h1>
+    <p class="subtitle">Seed inventory for our community garden</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Our seeds</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Variety</th>
+            <th class="number">Packets</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="seed-rows"></tbody>
+      </table>
+    </section>
+
+    <section class="why">
+      <h2>🌍 Why this matters</h2>
+      <ul>
+        <li><strong>SDG 2 Zero Hunger:</strong> tracking seed varieties helps keep a diversity of seeds (target 2.5).</li>
+        <li><strong>SDG 11 Sustainable Cities and Communities:</strong> supports a green community space (target 11.7).</li>
+        <li><strong>SDG 12 Responsible Consumption and Production:</strong> low-stock warnings help us buy only what we need.</li>
+        <li><strong>SDG 15 Life on Land:</strong> growing many kinds of plants supports local biodiversity.</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Rules first, then the page logic that uses them. -->
+  <script src="inventory.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
