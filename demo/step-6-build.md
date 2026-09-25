@@ -19,3 +19,14 @@ The rules live in `inventory.js` (`checkAmount`, `useSeeds`, `restockSeeds`), an
 If an amount is refused, a red message explains why and nothing changes.
 
 **Try to break it:** use 99 packets, use 0, type `-3`, type `2.5`, leave the box empty. Then reload the page. Are the changes still there?
+
+## Sprint 3 prompt (branch `step-6c`)
+
+> **Human:** Sprint 2 works, we couldn't make the numbers go negative. Continue with **Sprint 3**.
+
+**Agent:** Sprint 3 is done:
+- New **"Add a new seed"** form. `createSeed()` in `inventory.js` checks that the name isn't empty, that it isn't a duplicate (ignoring case and spaces), and that the starting packets are a whole number of 0 or more.
+- **"Reset to example data"** button, so you can restart the demo.
+- Documentation pass: every file has a header comment, every function has a JSDoc comment with the SDG it supports, and `README.md` now explains how to run the app, how the files fit together, and the SDG links.
+
+**Try to break it:** add a seed with an empty name, add "tomato / cherry" (it already exists as "Tomato / Cherry"), add "Pepper" with 0 packets.

@@ -21,6 +21,7 @@
       <h2>Our seeds</h2>
       <!-- Messages (e.g. "Not enough Tomato") appear here. aria-live reads them out for screen readers. -->
       <p id="message" class="message" aria-live="polite"></p>
+      <div class="table-wrap">
       <table>
         <thead>
           <tr>
@@ -33,6 +34,27 @@
         </thead>
         <tbody id="seed-rows"></tbody>
       </table>
+      </div>
+      <button id="reset-button" class="secondary small">Reset to example data</button>
+    </section>
+
+    <section>
+      <h2>Add a new seed</h2>
+      <form id="add-form" class="add-form">
+        <label>
+          Name
+          <input id="new-name" type="text" placeholder="e.g. Pepper">
+        </label>
+        <label>
+          Variety (optional)
+          <input id="new-variety" type="text" placeholder="e.g. Jalapeño">
+        </label>
+        <label>
+          Packets
+          <input id="new-quantity" type="number" value="0" min="0">
+        </label>
+        <button type="submit">Add seed</button>
+      </form>
     </section>
 
     <section class="why">

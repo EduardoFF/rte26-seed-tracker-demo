@@ -102,3 +102,69 @@ function restockSeeds(seed, amount) {
   const quantity = seed.quantity + amount;
   return { ok: true, quantity, message: `Added ${amount} packet(s) of ${seed.name}.` };
 }
+
+/**
+ * Makes text easy to compare: removes spaces at the start/end and ignores
+ * upper/lower case. So " Tomato " and "tomato" become the same.
+ *
+ * @param {string} text - Any text, for example a seed name.
+ * @returns {string} The cleaned-up text in lower case.
+ */
+function normalize(text) {
+  return (text || "").trim().toLowerCase();
+}
+
+/**
+ * Checks whether a seed with this name and variety already exists
+ * (SPEC.md rule R6). Case and extra spaces are ignored.
+ *
+ * @param {Array<{name: string, variety: string}>} seeds - The current inventory.
+ * @param {string} name - Name of the new seed.
+ * @param {string} variety - Variety of the new seed (can be empty).
+ * @returns {boolean} true if it is a duplicate.
+ */
+function isDuplicate(seeds, name, variety) {
+  return seeds.some(
+    (seed) => normalize(seed.name) === normalize(name) && normalize(seed.variety) === normalize(variety)
+  );
+}
+
+/**
+ * Creates a new seed if it follows the rules (SPEC.md feature F2, rules R5–R7):
+ * name required, no duplicates, starting quantity a whole number ≥ 0.
+ *
+ * SDG 2 (target 2.5): every new variety we track adds to the garden's seed diversity.
+ *
+ * @param {Array<{id: string, name: string, variety: string}>} seeds - The current inventory.
+ * @param {string} name - Name typed by the volunteer.
+ * @param {string} variety - Variety typed by the volunteer (optional).
+ * @param {number} quantity - Starting number of packets.
+ * @returns {{ok: boolean, seed?: object, message: string}}
+ *   ok: true with the new seed, or ok: false with the reason it was refused.
+ */
+function createSeed(seeds, name, variety, quantity) {
+  const cleanName = (name || "").trim();
+  const cleanVariety = (variety || "").trim();
+
+  if (cleanName === "") {
+    return { ok: false, message: "Please enter a seed name." };
+  }
+  if (!Number.isInteger(quantity) || quantity < 0) {
+    return { ok: false, message: "Starting packets must be a whole number (0 or more)." };
+  }
+  if (isDuplicate(seeds, cleanName, cleanVariety)) {
+    return {
+      ok: false,
+      message: `${cleanName} ${cleanVariety} is already in the list. Use "Restock" on it instead.`,
+    };
+  }
+
+  // Find an id that is not used yet, e.g. "seed-8".
+  let number = seeds.length + 1;
+  while (seeds.some((seed) => seed.id === `seed-${number}`)) {
+    number++;
+  }
+
+  const seed = { id: `seed-${number}`, name: cleanName, variety: cleanVariety, quantity };
+  return { ok: true, seed, message: `Added ${cleanName} to the inventory.` };
+}

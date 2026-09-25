@@ -178,3 +178,36 @@ button:focus-visible {
   border-left: 4px solid var(--out);
   background: #2a0d0d;
 }
+
+/* ---------- Table on small screens ---------- */
+
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+button.small {
+  padding: 4px 10px;
+  font-size: 0.9em;
+}
+
+/* ---------- "Add a new seed" form ---------- */
+
+.add-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.add-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+.add-form input[type="number"] {
+  width: 6em;
+}

@@ -136,4 +136,44 @@ function renderSeeds() {
   }
 }
 
+/**
+ * Handles the "Add a new seed" form (SPEC.md feature F2).
+ * The rules (name required, no duplicates…) are checked by createSeed() in inventory.js.
+ *
+ * @param {SubmitEvent} event - The form submit event.
+ */
+function handleAddSeed(event) {
+  // Stop the browser from reloading the page, which is what forms do by default.
+  event.preventDefault();
+
+  const nameInput = document.getElementById("new-name");
+  const varietyInput = document.getElementById("new-variety");
+  const quantityInput = document.getElementById("new-quantity");
+  const quantityText = quantityInput.value.trim();
+  const quantity = quantityText === "" ? NaN : Number(quantityText);
+
+  const result = createSeed(seeds, nameInput.value, varietyInput.value, quantity);
+  if (result.ok) {
+    seeds.push(result.seed);
+    saveSeeds();
+    renderSeeds();
+    event.target.reset();
+  }
+  showMessage(result.message, !result.ok);
+}
+
+/** Puts the example seeds back, so the demo can start again from the beginning. */
+function handleReset() {
+  if (!confirm("Replace all seeds with the example data?")) {
+    return;
+  }
+  seeds = EXAMPLE_SEEDS.map((seed) => ({ ...seed }));
+  saveSeeds();
+  renderSeeds();
+  showMessage("The example seeds are back.", false);
+}
+
+document.getElementById("add-form").addEventListener("submit", handleAddSeed);
+document.getElementById("reset-button").addEventListener("click", handleReset);
+
 renderSeeds();
