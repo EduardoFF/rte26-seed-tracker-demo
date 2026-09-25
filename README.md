@@ -4,8 +4,7 @@ A simple web app that helps a community garden keep track of its seed inventory.
 Built for the **Reboot the Earth** hackathon with an AI coding agent.
 
 - What the app should do: [`SPEC.md`](SPEC.md)
-- How the AI agent should work: [`AGENTS.md`](AGENTS.md)
-- The build plan: [`PLAN.md`](PLAN.md)
+- How the AI agent should work on it: [`AGENTS.md`](AGENTS.md)
 
 ## What it does
 
@@ -61,9 +60,10 @@ tests/inventory.test.js  ──tests──▶  inventory.js
 | Low-stock warnings, use/restock tracking | **SDG 12 Responsible Consumption and Production**: buy only what we need, avoid waste |
 | Growing many kinds of plants | **SDG 15 Life on Land**: local biodiversity |
 
-## Status
+## How it was built
 
-All 3 sprints done, plus search (`SPEC.md` v1.1). 25 automated tests pass.
+Step by step with an AI coding agent: idea → brainstorm → spec → agent instructions → plan → 3 sprints → tests → requirement change.
+Each step is saved in its own git branch (`step-3` to `step-9`), with the prompts and the agent's answers in the `demo/` folder.
 
 ## License
 
