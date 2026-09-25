@@ -1,0 +1,11 @@
+{
+  "name": "rte26-seed-tracker-demo",
+  "version": "1.0.0",
+  "description": "Seed inventory tracker for a community garden (Reboot the Earth demo)",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node --test --test-reporter=spec tests/"
+  }
+}

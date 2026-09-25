@@ -40,7 +40,7 @@ function getStockStatus(quantity) {
   if (quantity === 0) {
     return "Out of stock";
   }
-  if (quantity < LOW_STOCK_LIMIT) {
+  if (quantity <= LOW_STOCK_LIMIT) {
     return "Low stock";
   }
   return "In stock";
@@ -167,4 +167,20 @@ function createSeed(seeds, name, variety, quantity) {
 
   const seed = { id: `seed-${number}`, name: cleanName, variety: cleanVariety, quantity };
   return { ok: true, seed, message: `Added ${cleanName} to the inventory.` };
+}
+
+// Make the rules available to the automated tests (Node.js).
+// In the browser `module` does not exist, so this part is skipped.
+if (typeof module !== "undefined") {
+  module.exports = {
+    LOW_STOCK_LIMIT,
+    EXAMPLE_SEEDS,
+    getStockStatus,
+    checkAmount,
+    useSeeds,
+    restockSeeds,
+    normalize,
+    isDuplicate,
+    createSeed,
+  };
 }

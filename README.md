@@ -22,12 +22,24 @@ No installation needed.
 - **On your computer:** open `index.html` in a web browser.
 - **In GitHub Codespaces:** run `python3 -m http.server 8000` in the terminal, then open the forwarded port 8000.
 
+## How to run the tests
+
+The tests use Node's built-in test runner, so there is nothing to install:
+
+```
+npm test
+```
+
+Each test is named after the acceptance criterion (AC) or rule (R) in `SPEC.md` that it checks.
+
 ## How the files fit together
 
 ```
 index.html  ──loads──▶  inventory.js   (the rules: no web page code)
             ──loads──▶  app.js         (the page: buttons, table, saving)
             ──uses───▶  style.css      (black and blue theme)
+
+tests/inventory.test.js  ──tests──▶  inventory.js
 ```
 
 | File | What it does |
@@ -36,6 +48,8 @@ index.html  ──loads──▶  inventory.js   (the rules: no web page code)
 | `style.css` | Black and blue theme. Colors are CSS variables at the top. |
 | `inventory.js` | Business rules from `SPEC.md`: stock status, use/restock, adding seeds, checks |
 | `app.js` | Draws the table, handles buttons and the form, saves data in the browser (`localStorage`) |
+| `tests/inventory.test.js` | Automated tests for the rules in `inventory.js` |
+| `package.json` | Lets you run `npm test` and `npm start` (no dependencies) |
 
 ## Why this matters: Sustainable Development Goals
 
@@ -48,7 +62,7 @@ index.html  ──loads──▶  inventory.js   (the rules: no web page code)
 
 ## Status
 
-All 3 sprints done. Next: automated tests.
+All 3 sprints done, and 18 automated tests pass.
 
 ## License
 
