@@ -19,6 +19,8 @@
   <main>
     <section>
       <h2>Our seeds</h2>
+      <!-- Messages (e.g. "Not enough Tomato") appear here. aria-live reads them out for screen readers. -->
+      <p id="message" class="message" aria-live="polite"></p>
       <table>
         <thead>
           <tr>
@@ -26,6 +28,7 @@
             <th>Variety</th>
             <th class="number">Packets</th>
             <th>Status</th>
+            <th>Use / Restock</th>
           </tr>
         </thead>
         <tbody id="seed-rows"></tbody>

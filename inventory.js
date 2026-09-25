@@ -45,3 +45,60 @@ function getStockStatus(quantity) {
   }
   return "In stock";
 }
+
+/**
+ * Checks that an amount to use or restock is valid (SPEC.md rule R2):
+ * a whole number of at least 1.
+ *
+ * @param {number} amount - The amount typed by the volunteer.
+ * @returns {string|null} An error message, or null if the amount is valid.
+ */
+function checkAmount(amount) {
+  if (!Number.isInteger(amount) || amount < 1) {
+    return "Please enter a whole number of packets (1 or more).";
+  }
+  return null;
+}
+
+/**
+ * Takes packets out of the inventory (SPEC.md feature F3).
+ * The quantity can reach 0 but never go below it (rules R1 and R3).
+ *
+ * SDG 12: knowing exactly what we used helps avoid waste.
+ *
+ * @param {{name: string, variety: string, quantity: number}} seed - The seed to use.
+ * @param {number} amount - How many packets to take.
+ * @returns {{ok: boolean, quantity?: number, message: string}}
+ *   ok: true with the new quantity, or ok: false with the reason it was refused.
+ */
+function useSeeds(seed, amount) {
+  const error = checkAmount(amount);
+  if (error) {
+    return { ok: false, message: error };
+  }
+  if (amount > seed.quantity) {
+    return {
+      ok: false,
+      message: `Not enough ${seed.name}: we only have ${seed.quantity} packet(s).`,
+    };
+  }
+  const quantity = seed.quantity - amount;
+  return { ok: true, quantity, message: `Used ${amount} packet(s) of ${seed.name}.` };
+}
+
+/**
+ * Adds packets to the inventory (SPEC.md feature F4).
+ *
+ * @param {{name: string, variety: string, quantity: number}} seed - The seed to restock.
+ * @param {number} amount - How many packets to add.
+ * @returns {{ok: boolean, quantity?: number, message: string}}
+ *   ok: true with the new quantity, or ok: false with the reason it was refused.
+ */
+function restockSeeds(seed, amount) {
+  const error = checkAmount(amount);
+  if (error) {
+    return { ok: false, message: error };
+  }
+  const quantity = seed.quantity + amount;
+  return { ok: true, quantity, message: `Added ${amount} packet(s) of ${seed.name}.` };
+}

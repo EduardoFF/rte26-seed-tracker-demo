@@ -20,9 +20,9 @@ No installation needed.
 |---|---|
 | `index.html` | The page layout |
 | `style.css` | Black and blue theme |
-| `inventory.js` | Business rules (stock status and example seeds) |
-| `app.js` | Draws the seed table on the page |
+| `inventory.js` | Business rules: stock status, use and restock, amount checks (no web page code) |
+| `app.js` | Draws the seed table, handles the buttons, saves data in the browser (`localStorage`) |
 
 ## Status
 
-Sprint 1 of 3 done: the app shows the seed list and stock status.
+Sprint 2 of 3 done: volunteers can use and restock seeds, and data is saved in the browser.
