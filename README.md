@@ -12,6 +12,7 @@ Built for the **Reboot the Earth** hackathon with an AI coding agent.
 - Shows all seeds with the number of packets and a stock status (**In stock**, **Low stock** at 5 or fewer, **Out of stock** at 0).
 - **Use** packets (never more than we have, never below zero) and **Restock** packets.
 - **Add** new seeds (name required, no duplicates).
+- **Search** by name or variety (partial, ignores upper/lower case).
 - Remembers everything in the browser, even after closing it.
 - **Reset to example data** puts the demo seeds back.
 
@@ -44,9 +45,9 @@ tests/inventory.test.js  ──tests──▶  inventory.js
 
 | File | What it does |
 |---|---|
-| `index.html` | The page layout: seed table, add form, SDG section |
+| `index.html` | The page layout: search box, seed table, add form, SDG section |
 | `style.css` | Black and blue theme. Colors are CSS variables at the top. |
-| `inventory.js` | Business rules from `SPEC.md`: stock status, use/restock, adding seeds, checks |
+| `inventory.js` | Business rules from `SPEC.md`: stock status, use/restock, adding seeds, search, checks |
 | `app.js` | Draws the table, handles buttons and the form, saves data in the browser (`localStorage`) |
 | `tests/inventory.test.js` | Automated tests for the rules in `inventory.js` |
 | `package.json` | Lets you run `npm test` and `npm start` (no dependencies) |
@@ -62,7 +63,7 @@ tests/inventory.test.js  ──tests──▶  inventory.js
 
 ## Status
 
-All 3 sprints done, and 18 automated tests pass.
+All 3 sprints done, plus search (`SPEC.md` v1.1). 25 automated tests pass.
 
 ## License
 

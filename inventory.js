@@ -169,6 +169,26 @@ function createSeed(seeds, name, variety, quantity) {
   return { ok: true, seed, message: `Added ${cleanName} to the inventory.` };
 }
 
+/**
+ * Finds the seeds that match a search text (SPEC.md feature F6, rule R8).
+ * A seed matches if the text appears anywhere in its name or variety,
+ * ignoring upper/lower case. An empty search returns all seeds.
+ * This never changes the seeds, it only picks which ones to show.
+ *
+ * @param {Array<{name: string, variety: string}>} seeds - The current inventory.
+ * @param {string} searchText - What the volunteer typed in the search box.
+ * @returns {Array} The matching seeds (all seeds if the search is empty).
+ */
+function searchSeeds(seeds, searchText) {
+  const text = normalize(searchText);
+  if (text === "") {
+    return seeds;
+  }
+  return seeds.filter(
+    (seed) => normalize(seed.name).includes(text) || normalize(seed.variety).includes(text)
+  );
+}
+
 // Make the rules available to the automated tests (Node.js).
 // In the browser `module` does not exist, so this part is skipped.
 if (typeof module !== "undefined") {
@@ -182,5 +202,6 @@ if (typeof module !== "undefined") {
     normalize,
     isDuplicate,
     createSeed,
+    searchSeeds,
   };
 }

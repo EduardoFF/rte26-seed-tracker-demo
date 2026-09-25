@@ -103,7 +103,7 @@ function createActionsCell(seed) {
 }
 
 /**
- * Draws one table row per seed (SPEC.md feature F1).
+ * Draws one table row per seed that matches the search (SPEC.md features F1 and F6).
  * We build the text with textContent (not innerHTML) so that seed names
  * typed by users can never be interpreted as HTML.
  */
@@ -111,7 +111,15 @@ function renderSeeds() {
   const rows = document.getElementById("seed-rows");
   rows.innerHTML = "";
 
-  for (const seed of seeds) {
+  // Only show the seeds that match the search box (SPEC.md feature F6).
+  const searchText = document.getElementById("search").value;
+  const visibleSeeds = searchSeeds(seeds, searchText);
+
+  const noResults = document.getElementById("no-results");
+  noResults.hidden = visibleSeeds.length > 0;
+  noResults.textContent = `No seeds match "${searchText.trim()}".`;
+
+  for (const seed of visibleSeeds) {
     const row = document.createElement("tr");
     const status = getStockStatus(seed.quantity);
 
@@ -175,5 +183,7 @@ function handleReset() {
 
 document.getElementById("add-form").addEventListener("submit", handleAddSeed);
 document.getElementById("reset-button").addEventListener("click", handleReset);
+// Redraw the table on every key press in the search box, so results update while typing.
+document.getElementById("search").addEventListener("input", renderSeeds);
 
 renderSeeds();

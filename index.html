@@ -21,6 +21,10 @@
       <h2>Our seeds</h2>
       <!-- Messages (e.g. "Not enough Tomato") appear here. aria-live reads them out for screen readers. -->
       <p id="message" class="message" aria-live="polite"></p>
+      <label class="search">
+        🔍 Search
+        <input id="search" type="search" placeholder="Name or variety, e.g. tom">
+      </label>
       <div class="table-wrap">
       <table>
         <thead>
@@ -35,6 +39,7 @@
         <tbody id="seed-rows"></tbody>
       </table>
       </div>
+      <p id="no-results" class="no-results" hidden></p>
       <button id="reset-button" class="secondary small">Reset to example data</button>
     </section>
 

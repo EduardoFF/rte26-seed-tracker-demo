@@ -13,6 +13,7 @@ const {
   useSeeds,
   restockSeeds,
   createSeed,
+  searchSeeds,
 } = require("../inventory.js");
 
 /** Small helper: a seed with the given number of packets. */
@@ -108,4 +109,42 @@ test("R7: a new seed can start with 0 packets", () => {
 test("R1: a new seed cannot start with a negative or decimal quantity", () => {
   assert.equal(createSeed(EXAMPLE_SEEDS, "Pepper", "", -1).ok, false);
   assert.equal(createSeed(EXAMPLE_SEEDS, "Pepper", "", 1.5).ok, false);
+});
+
+// ---------- AC11–AC14: search (added in SPEC v1.1) ----------
+
+/** Helper: the "name / variety" of each seed found, to compare easily. */
+function found(searchText) {
+  return searchSeeds(EXAMPLE_SEEDS, searchText).map((s) => `${s.name} / ${s.variety}`);
+}
+
+test("AC11: searching 'tom' finds both tomatoes and nothing else", () => {
+  assert.deepEqual(found("tom"), ["Tomato / Cherry", "Tomato / San Marzano"]);
+});
+
+test("AC12: search ignores upper/lower case", () => {
+  assert.deepEqual(found("TOMATO"), found("tomato"));
+});
+
+test("AC13: search also looks at the variety", () => {
+  assert.deepEqual(found("marzano"), ["Tomato / San Marzano"]);
+});
+
+test("AC14: an empty search shows all seeds", () => {
+  assert.equal(found("").length, EXAMPLE_SEEDS.length);
+  assert.equal(found("   ").length, EXAMPLE_SEEDS.length);
+});
+
+test("AC14: a search with no match finds no seeds", () => {
+  assert.deepEqual(found("xyz"), []);
+});
+
+test("R8: spaces around the search text are ignored", () => {
+  assert.deepEqual(found("  basil  "), ["Basil / "]);
+});
+
+test("R8: searching never changes the data", () => {
+  const before = JSON.stringify(EXAMPLE_SEEDS);
+  searchSeeds(EXAMPLE_SEEDS, "tom");
+  assert.equal(JSON.stringify(EXAMPLE_SEEDS), before);
 });

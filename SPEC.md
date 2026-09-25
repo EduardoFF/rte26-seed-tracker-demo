@@ -1,6 +1,6 @@
 # Seed Tracker: Specification
 
-_Version 1.0_
+_Version 1.1: added search (see Change log at the end)_
 
 ## 1. Purpose
 
@@ -35,6 +35,7 @@ Each seed in the inventory has:
   - **Out of stock** when quantity is 0
   - **Low stock** when quantity is 1–5
   - **In stock** when quantity is 6 or more
+- **F6. Search seeds** _(added in v1.1)_: type in a search box to show only the seeds that match. The list updates while typing.
 
 ## 5. Business rules
 
@@ -45,6 +46,14 @@ Each seed in the inventory has:
 - **R5.** A seed **name cannot be empty** (spaces only counts as empty).
 - **R6.** Two seeds with the **same name and variety** are not allowed. The comparison **ignores upper/lower case** and extra spaces at the start and end. The app suggests restocking the existing seed instead.
 - **R7.** A new seed can start with **0 packets** (to remember we need to buy it).
+- **R8.** _(v1.1)_ Search rules:
+  - A seed matches if the search text appears **anywhere** in its **name or its variety** (partial match: "tom" finds "Tomato", "cherry" finds "Tomato / Cherry").
+  - Search **ignores upper/lower case** and spaces at the start and end.
+  - The search text is treated as **one piece**: "tomato cherry" does not find "Tomato / Cherry" (a known limitation, accepted for now).
+  - An **empty** search box shows **all** seeds.
+  - If nothing matches, the app shows a "No seeds match" message.
+  - Searching **never changes** the data. Use and Restock still work on the seeds that are shown.
+  - The search text is **not saved**. After a reload the full list is shown.
 
 ## 6. Edge cases
 
@@ -58,6 +67,10 @@ Each seed in the inventory has:
 | Add "Tomato" with no variety when "Tomato / Cherry" exists | Allowed (different variety).                  |
 | Add a seed with name "   "                     | Refused: name is required.                              |
 | Close the browser and open it again            | All seeds and quantities are still there.               |
+| Search "TOM"                                   | Shows both tomatoes.                                     |
+| Search "  basil  "                             | Shows Basil (spaces ignored).                            |
+| Search "xyz"                                   | Empty list with a "No seeds match" message.              |
+| Clear the search box                           | All seeds are shown again.                               |
 
 ## 7. Acceptance criteria
 
@@ -71,12 +84,22 @@ Each seed in the inventory has:
 - **AC8.** Adding a seed with an empty name is refused.
 - **AC9.** Adding a duplicate seed (same name and variety, ignoring case) is refused.
 - **AC10.** After reloading the page, all changes are still there.
+- **AC11.** _(v1.1)_ Searching "tom" shows "Tomato / Cherry" and "Tomato / San Marzano" and no other seeds.
+- **AC12.** _(v1.1)_ Search ignores case: "TOMATO" and "tomato" give the same result.
+- **AC13.** _(v1.1)_ Search also looks at the variety: "marzano" shows "Tomato / San Marzano".
+- **AC14.** _(v1.1)_ An empty search shows all seeds. A search with no match shows no seeds and a "No seeds match" message.
 
 ## 8. Out of scope (for now)
 
 - Login, passwords, or different user roles
 - Sharing data between several devices, online database or server
 - Deleting seeds (a seed can stay at 0 instead)
-- Searching or filtering seeds
+- Filtering by stock status (e.g. "show only low stock") _(v1.1: suggested, postponed)_
+- Search that ignores accents ("jalapeno" finding "Jalapeño") or matches several words separately _(v1.1)_
 - History of who used or restocked what
 - Storage location, planting season, expiry dates, photos
+
+## Change log
+
+- **v1.1**: Added **search** (F6, R8, AC11–AC14). Search moved from "out of scope" to "in scope". Decisions: partial match, name and variety, case-insensitive, not saved. Filtering by status and accent-insensitive search stay out of scope.
+- **v1.0**: First version, agreed in the brainstorm.
